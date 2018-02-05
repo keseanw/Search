@@ -27,12 +27,10 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
 
             switch (position) {
                 case 0:
-                    SpecialFragment tab1 = new SpecialFragment();
-                    return tab1;
+                    return new SpecialFragment();
 
                 case 1:
-                    MatchFragment tab2 = new MatchFragment();
-                    return tab2;
+                    return new MatchFragment();
 
                 default:
                     return null;
