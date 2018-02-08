@@ -55,18 +55,12 @@ public class SearchRepository implements SearchDataSource{
 
     @Override
     public void addSearch(Datum data) {
-        //dont need this
         throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override
     public int likeUser(Datum user) {
         return localDataSource.likeUser(user);
-                //.filter(user -> user.getUserid().equals(id));
-//                .doOnNext(result -> {
-//
-//                    caches.add(result);
-//                }).
     }
 
     private Flowable<List<Datum>> refreshData() {
@@ -79,13 +73,14 @@ public class SearchRepository implements SearchDataSource{
         }).toList().toFlowable();
     }
 
-//    public Flowable<Datum> likeUser(String userId) {
-//        return Flowable.fromIterable(caches).filter(search -> search.getUserid().equals(userId));
-//    }
-
     @Override
     public void clearData() {
         caches.clear();
         localDataSource.clearData();
+    }
+
+    @Override
+    public Flowable<List<Datum>> getMatches() {
+        return localDataSource.getMatches();
     }
 }

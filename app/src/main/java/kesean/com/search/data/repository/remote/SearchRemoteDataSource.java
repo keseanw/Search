@@ -45,4 +45,9 @@ public class SearchRemoteDataSource implements SearchDataSource {
 
     }
 
+    @Override
+    public Flowable<List<Datum>> getMatches() {
+        return null;
+    }
+
 }

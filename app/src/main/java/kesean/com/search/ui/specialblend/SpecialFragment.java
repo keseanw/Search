@@ -106,13 +106,6 @@ public class SpecialFragment extends Fragment implements SpecialContract.View {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -160,7 +153,9 @@ public class SpecialFragment extends Fragment implements SpecialContract.View {
 
     @Override
     public void stopLoadingIndicator() {
-
+        if (refreshLayout.isRefreshing()) {
+            refreshLayout.setRefreshing(false);
+        }
     }
 
     @Override

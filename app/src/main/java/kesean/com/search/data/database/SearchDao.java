@@ -23,24 +23,21 @@ public interface SearchDao {
     @Query("SELECT * FROM " + Config.SEARCH_TABLE_NAME)
     Flowable<List<Datum>> getAllSearch();
 
-    //create a more fine grained model for view?
     //not in use
     @Query("SELECT * FROM " + Config.SEARCH_TABLE_NAME + " WHERE mUserid == :id")
     Flowable<Datum> getSearchById(int id);
 
-    //update liked field based on userId or some other primary key
-    //not in use
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Datum search);
 
-    //get matches that are liked
     //not in use
     @Query("DELETE FROM " + Config.SEARCH_TABLE_NAME)
     void deleteAll();
 
-    //@Query("UPDATE search SET mLiked = :likeVal WHERE mUserid = :id")
     @Update
     int update(Datum user);
-    //Flowable<Datum> update(String id, boolean likeVal);
+
+    @Query("SELECT * FROM " + Config.SEARCH_TABLE_NAME + " WHERE mLiked = 1 ORDER BY mMatch DESC LIMIT 6")
+    Flowable<List<Datum>> getMatches();
 }
 

@@ -20,4 +20,6 @@ public interface SearchDataSource {
     int likeUser(Datum user);
 
     void clearData();
+
+    Flowable<List<Datum>> getMatches();
 }

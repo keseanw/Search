@@ -1,4 +1,4 @@
-package kesean.com.search.ui.specialblend;
+package kesean.com.search.ui.match;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
@@ -9,21 +9,20 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import kesean.com.search.data.model.Datum;
-import kesean.com.search.data.model.Search;
 import kesean.com.search.data.repository.SearchRepository;
+import kesean.com.search.ui.specialblend.SpecialContract;
 import kesean.com.search.util.RunOn;
 import kesean.com.search.util.SchedulerType;
 
 /**
- * Created by Kesean on 2/5/18.
+ * Created by Kesean on 2/7/18.
  */
 
-public class SpecialPresenter implements SpecialContract.Presenter, LifecycleObserver {
+public class MatchPresenter implements SpecialContract.MatchPresenter, LifecycleObserver {
 
     private SearchRepository repository;
 
@@ -35,8 +34,8 @@ public class SpecialPresenter implements SpecialContract.Presenter, LifecycleObs
     private CompositeDisposable disposeBag;
 
     @Inject
-    public SpecialPresenter(SearchRepository repository, SpecialContract.View view,
-                            @RunOn(SchedulerType.IO) Scheduler ioScheduler, @RunOn(SchedulerType.UI) Scheduler uiScheduler) {
+    public MatchPresenter(SearchRepository repository, SpecialContract.View view,
+                          @RunOn(SchedulerType.IO) Scheduler ioScheduler, @RunOn(SchedulerType.UI) Scheduler uiScheduler) {
         this.repository = repository;
         this.view = view;
         this.ioScheduler = ioScheduler;
@@ -50,44 +49,29 @@ public class SpecialPresenter implements SpecialContract.Presenter, LifecycleObs
         disposeBag = new CompositeDisposable();
     }
 
-    @Override @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    @Override
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onAttach() {
-        loadSpecial(false);
+        loadMatches();
     }
 
-    @Override @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    @Override
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     public void onDetach() {
-        // Clean up any no-longer-use resources here
         disposeBag.clear();
     }
 
     @Override
-    public void loadSpecial(boolean onlineRequired) {
+    public void loadMatches() {
         // Clear old data on view
         view.clearSpecial();
 
         // Load new one and populate it into view
-        Disposable disposable = repository.loadSearch(onlineRequired)
+        Disposable disposable = repository.getMatches()
                 .subscribeOn(ioScheduler)
                 .observeOn(uiScheduler)
                 .subscribe(this::handleReturnedData, this::handleError, () -> view.stopLoadingIndicator());
         disposeBag.add(disposable);
-    }
-
-    @Override
-    public void likeUser(Datum user, int position) {
-
-        if(!user.getLiked()) {
-            user.setLiked(true);
-        }else{
-            user.setLiked(false);
-        }
-
-        Observable.fromCallable(() -> repository.likeUser(user))
-                .filter(userLikeBool -> userLikeBool != null)
-                .subscribeOn(ioScheduler)
-                .observeOn(uiScheduler)
-                .subscribe(likedUser -> view.showHighlight(user, position));
     }
 
     /**
@@ -98,6 +82,7 @@ public class SpecialPresenter implements SpecialContract.Presenter, LifecycleObs
         if (list != null && !list.isEmpty()) {
             view.showSpecial(list);
         } else {
+            view.clearSpecial();
             view.showNoDataMessage();
         }
     }

@@ -49,4 +49,9 @@ public class SearchLocalDataSource implements SearchDataSource{
     public void clearData() {
 
     }
+
+    @Override
+    public Flowable<List<Datum>> getMatches() {
+        return searchDao.getMatches();
+    }
 }

@@ -1,6 +1,7 @@
-package kesean.com.search.ui.specialblend;
+package kesean.com.search.ui.match;
 
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,22 +13,21 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.annotations.NonNull;
 import kesean.com.search.R;
 import kesean.com.search.data.model.Datum;
-import kesean.com.search.data.model.Search;
 import kesean.com.search.ui.base.BaseRecyclerViewAdapter;
 
 /**
- * Created by Kesean on 2/5/18.
+ * Created by Kesean on 2/7/18.
  */
 
-class SpecialAdapter extends BaseRecyclerViewAdapter<SpecialAdapter.SpecialViewHolder> {
-    class SpecialViewHolder extends RecyclerView.ViewHolder {
+class MatchAdapter extends BaseRecyclerViewAdapter<MatchAdapter.MatchViewHolder> {
+    public class MatchViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.username)
         TextView username;
         @BindView(R.id.cardViewLayout)
@@ -43,36 +43,36 @@ class SpecialAdapter extends BaseRecyclerViewAdapter<SpecialAdapter.SpecialViewH
         @BindView(R.id.image_profile)
         ImageView profileImage;
 
-        public SpecialViewHolder(View view) {
+        public MatchViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
     }
-
-    private List<Datum> searchList;
-
-    public SpecialAdapter(@NonNull List<Datum> special) {
-        this.searchList = special;
+    public MatchAdapter(@NonNull ArrayList<Datum> matchList) {
+        this.matchList = matchList;
     }
 
     @Override
-    public SpecialViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MatchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_special, parent, false);
-        return new SpecialViewHolder(view);
+        return new MatchViewHolder(view);
+    }
+
+    private List<Datum> matchList;
+
+    @Override
+    public int getItemCount() {
+        return matchList.size();
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         super.onBindViewHolder(viewHolder, i);
-        SpecialViewHolder vh = (SpecialViewHolder) viewHolder;
+        MatchAdapter.MatchViewHolder vh = (MatchAdapter.MatchViewHolder) viewHolder;
 
-        Datum special_item = searchList.get(i);
-        if(special_item.getLiked()){
-            vh.cardView.setCardBackgroundColor(Color.parseColor("#FFFD38"));
-        }else{
-            vh.cardView.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
-        }
+        Datum special_item = matchList.get(i);
+
         vh.username.setText(special_item.getUsername());
         vh.age.setText(String.valueOf(special_item.getAge()));
         vh.locationCity.setText(special_item.getCityName());
@@ -81,32 +81,28 @@ class SpecialAdapter extends BaseRecyclerViewAdapter<SpecialAdapter.SpecialViewH
         Glide.with(vh.profileImage).load(special_item.getPhoto().getFullPaths().getOriginal()).into(vh.profileImage);
     }
 
-    @Override
-    public int getItemCount() {
-        return searchList.size();
-    }
-
     public void replaceData(List<Datum> special) {
-        this.searchList.clear();
-        this.searchList.addAll(special);
+        this.matchList.clear();
+        this.matchList.addAll(special);
         notifyDataSetChanged();
     }
 
     public void updateList(Datum user, int position) {
-        this.searchList.set(position, user);
+        this.matchList.set(position, user);
         notifyItemChanged(position);
     }
 
     public Datum getItem(int position) {
-        if (position < 0 || position >= searchList.size()) {
+        if (position < 0 || position >= matchList.size()) {
             throw new InvalidParameterException("Invalid item index");
         }
-        return searchList.get(position);
+        return matchList.get(position);
     }
 
     public void clearData() {
-        searchList.clear();
+        matchList.clear();
         notifyDataSetChanged();
     }
+
 
 }

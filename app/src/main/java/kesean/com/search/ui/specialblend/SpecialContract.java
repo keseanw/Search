@@ -35,4 +35,9 @@ public interface SpecialContract {
         void likeUser(Datum user, int position);
 
     }
+
+    interface MatchPresenter extends BasePresenter<SpecialContract.View> {
+
+        void loadMatches();
+    }
 }
