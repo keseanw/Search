@@ -7,6 +7,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
+import io.reactivex.Single;
+import kesean.com.search.data.model.Datum;
 import kesean.com.search.data.model.Search;
 
 /**
@@ -17,7 +19,7 @@ public class SearchRepository implements SearchDataSource{
 
     private SearchDataSource remoteDataSource;
     private SearchDataSource localDataSource;
-    List<Search> caches;
+    List<Datum> caches;
 
     @Inject
     public SearchRepository(@Local SearchDataSource localDataSource,
@@ -29,14 +31,14 @@ public class SearchRepository implements SearchDataSource{
     }
 
     @Override
-    public Flowable<List<Search>> loadSearch(boolean forceRemote) {
-        if (forceRemote) {
-            return refreshData();
-        } else {
-            if (caches.size() > 0) {
-                // if cache is available, return it immediately
-                return Flowable.just(caches);
-            } else {
+    public Flowable<List<Datum>> loadSearch(boolean forceRemote) {
+//        if (forceRemote) {
+//            return refreshData();
+//        } else {
+//            if (caches.size() > 0) {
+//                // if cache is available, return it immediately
+//                return Flowable.just(caches);
+//            } else {
                 // else return data from local storage
                 return localDataSource.loadSearch(false)
                         .take(1)
@@ -47,27 +49,39 @@ public class SearchRepository implements SearchDataSource{
                         .filter(list -> !list.isEmpty())
                         .switchIfEmpty(
                                 refreshData()); // If local data is empty, fetch from remote source instead.
-            }
-        }
-    }
-
-    private Flowable<List<Search>> refreshData() {
-        return remoteDataSource.loadSearch(true).doOnNext(list -> {
-            // Clear cache
-            caches.clear();
-            // Clear data in local storage
-            localDataSource.clearData();
-        }).flatMap(Flowable::fromIterable).doOnNext(search -> {
-            caches.add(search);
-            //revisit
-            //localDataSource.(question);
-        }).toList().toFlowable();
+//            }
+//        }
     }
 
     @Override
-    public void likeUser(Search search) {
-
+    public void addSearch(Datum data) {
+        //dont need this
+        throw new UnsupportedOperationException("Unsupported operation");
     }
+
+    @Override
+    public int likeUser(Datum user) {
+        return localDataSource.likeUser(user);
+                //.filter(user -> user.getUserid().equals(id));
+//                .doOnNext(result -> {
+//
+//                    caches.add(result);
+//                }).
+    }
+
+    private Flowable<List<Datum>> refreshData() {
+        return remoteDataSource.loadSearch(true)
+                .flatMap(Flowable::fromIterable)
+                .doOnNext(search -> {
+                    caches.add(search);
+                    //revisit
+                    localDataSource.addSearch(search);
+        }).toList().toFlowable();
+    }
+
+//    public Flowable<Datum> likeUser(String userId) {
+//        return Flowable.fromIterable(caches).filter(search -> search.getUserid().equals(userId));
+//    }
 
     @Override
     public void clearData() {

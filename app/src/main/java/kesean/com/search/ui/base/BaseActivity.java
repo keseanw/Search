@@ -11,7 +11,7 @@ import kesean.com.search.data.SearchRepositoryComponent;
 public class BaseActivity extends AppCompatActivity {
     private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
 
-    protected SearchRepositoryComponent getSearchRepositoryComponent() {
+    public SearchRepositoryComponent getSearchRepositoryComponent() {
         return ((AndroidApplication) getApplication()).getSearchRepositoryComponent();
     }
 

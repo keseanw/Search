@@ -2,6 +2,7 @@ package kesean.com.search.ui.specialblend;
 
 import java.util.List;
 
+import kesean.com.search.data.model.Datum;
 import kesean.com.search.data.model.Search;
 import kesean.com.search.ui.base.BasePresenter;
 
@@ -12,7 +13,7 @@ import kesean.com.search.ui.base.BasePresenter;
 public interface SpecialContract {
 
     interface View {
-        void showSpecial(List<Search> search);
+        void showSpecial(List<Datum> search);
 
         void clearSpecial();
 
@@ -20,7 +21,7 @@ public interface SpecialContract {
 
         void showErrorMessage(String error);
 
-        //void showSearchDetail(Search search);
+        void showHighlight(Datum likedUser, int position);
 
         void stopLoadingIndicator();
 
@@ -31,7 +32,7 @@ public interface SpecialContract {
 
         void loadSpecial(boolean onlineRequired);
 
-        //void getQuestion(long questionId);
+        void likeUser(Datum user, int position);
 
     }
 }

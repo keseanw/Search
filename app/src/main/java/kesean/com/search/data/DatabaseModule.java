@@ -17,7 +17,7 @@ import kesean.com.search.data.model.Search;
  */
 
 @Module
-class DatabaseModule {
+public class DatabaseModule {
     private static final String DATABASE = "database_name";
 
     @Provides

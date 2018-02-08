@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 
 import kesean.com.search.data.Config;
 
-@Entity(tableName = Config.SEARCH_TABLE_NAME)
+//@Entity(tableName = Config.SEARCH_TABLE_NAME)
 public class Search {
 
     @SerializedName("search_id")
@@ -20,8 +20,8 @@ public class Search {
     private long id;
 
     @SerializedName("data")
+    @Embedded(prefix = "data")
     @Ignore
-    //@Embedded(prefix = "data")
     private List<Datum> mData;
     @SerializedName("paging")
     //@Embedded(prefix = "paging")

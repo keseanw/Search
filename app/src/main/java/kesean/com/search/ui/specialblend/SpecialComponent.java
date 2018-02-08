@@ -15,4 +15,6 @@ import kesean.com.search.util.SchedulerModule;
 })
 public interface SpecialComponent {
     void inject(SpecialActivity specialActivity);
+
+    void inject(SpecialFragment specialFragment);
 }

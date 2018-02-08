@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import io.reactivex.Flowable;
 import kesean.com.search.data.api.SearchResponse;
 import kesean.com.search.data.api.SearchService;
+import kesean.com.search.data.model.Datum;
 import kesean.com.search.data.model.Search;
 import kesean.com.search.data.repository.SearchDataSource;
 
@@ -23,14 +24,20 @@ public class SearchRemoteDataSource implements SearchDataSource {
     }
 
     @Override
-    public Flowable<List<Search>> loadSearch(boolean forceRemote) {
+    public Flowable<List<Datum>> loadSearch(boolean forceRemote) {
         return searchService.loadSearch().map(SearchResponse::getSearch);
-        //return searchService.loadSearch(Config.ANDROID_QUESTION_TAG).map(QuestionResponse::getQuestions);
     }
 
     @Override
-    public void likeUser(Search search) {
+    public void addSearch(Datum data) {
+        //Currently, we do not need this for remote source.
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
 
+    //not in use
+    @Override
+    public int likeUser(Datum user){
+        return 0;
     }
 
     @Override

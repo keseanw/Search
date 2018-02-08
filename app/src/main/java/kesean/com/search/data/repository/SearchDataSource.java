@@ -3,6 +3,8 @@ package kesean.com.search.data.repository;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Single;
+import kesean.com.search.data.model.Datum;
 import kesean.com.search.data.model.Search;
 
 /**
@@ -11,10 +13,11 @@ import kesean.com.search.data.model.Search;
 
 public interface SearchDataSource {
 
-    Flowable<List<Search>> loadSearch(boolean forceRemote);
+    Flowable<List<Datum>> loadSearch(boolean forceRemote);
 
-    //must change - shouldnt work
-    void likeUser(Search search);
+    void addSearch(Datum data);
+
+    int likeUser(Datum user);
 
     void clearData();
 }

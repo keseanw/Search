@@ -1,76 +1,104 @@
 
 package kesean.com.search.data.model;
 
+import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 import javax.annotation.Generated;
+import javax.annotation.Nonnull;
+
 import com.google.gson.annotations.SerializedName;
 
+import kesean.com.search.data.Config;
 
-@Entity(foreignKeys = @ForeignKey(
-        entity = Search.class,
-        parentColumns = "name",
-        childColumns = "parentId"))
+
+//@Entity(foreignKeys = @ForeignKey(
+//        entity = Search.class,
+//        parentColumns = "name",
+//        childColumns = "parentId"))
+@Entity(tableName = Config.SEARCH_TABLE_NAME)
 public class Datum {
+
+    //@PrimaryKey
+    //private long id;
 
     @SerializedName("age")
     private Long mAge;
     @SerializedName("city_name")
     private String mCityName;
     @SerializedName("country_code")
+    @Ignore
     private String mCountryCode;
     @SerializedName("country_name")
+    @Ignore
     private String mCountryName;
     @SerializedName("enemy")
+    @Ignore
     private Long mEnemy;
     @SerializedName("friend")
+    @Ignore
     private Long mFriend;
     @SerializedName("gender")
+    @Ignore
     private Long mGender;
     @SerializedName("gender_tags")
+    @Ignore
     private List<Object> mGenderTags;
     @SerializedName("is_online")
+    @Ignore
     private Long mIsOnline;
     @SerializedName("last_contact_time")
+    @Ignore
     private List<Long> mLastContactTime;
     @SerializedName("last_login")
+    @Ignore
     private Long mLastLogin;
     @SerializedName("liked")
     private Boolean mLiked;
     @SerializedName("location")
+    @Ignore
     private Location mLocation;
     @SerializedName("match")
     private Long mMatch;
     @SerializedName("orientation")
+    @Ignore
     private Long mOrientation;
     @SerializedName("orientation_tags")
+    @Ignore
     private List<Object> mOrientationTags;
     @SerializedName("photo")
+    @Embedded(prefix = "photo_")
     private Photo mPhoto;
     @SerializedName("relative")
+    @Ignore
     private Long mRelative;
     @SerializedName("state_code")
     private String mStateCode;
     @SerializedName("state_name")
+    @Ignore
     private String mStateName;
     @SerializedName("stoplight_color")
+    @Ignore
     private String mStoplightColor;
+    @PrimaryKey
     @SerializedName("userid")
+    @NonNull
     private String mUserid;
     @SerializedName("username")
     private String mUsername;
 
-    private String parentId;
-
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
-    }
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public void setId(long id) {
+//        this.id = id;
+//    }
 
     public Long getAge() {
         return mAge;

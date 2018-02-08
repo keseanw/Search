@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import kesean.com.search.data.model.Datum;
 import kesean.com.search.data.model.Search;
 
 /**
@@ -12,13 +13,14 @@ import kesean.com.search.data.model.Search;
 
 public class SearchResponse {
 
-    private List<Search> search;
+    @SerializedName("data")
+    private List<Datum> search;
 
-    public List<Search> getSearch() {
+    public List<Datum> getSearch() {
         return search;
     }
 
-    public void setSearch(List<Search> search) {
+    public void setSearch(List<Datum> search) {
         this.search = search;
     }
 }
