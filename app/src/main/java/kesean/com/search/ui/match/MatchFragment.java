@@ -51,10 +51,6 @@ public class MatchFragment extends Fragment implements SpecialContract.View{
 
     public static MatchFragment newInstance() {
         MatchFragment fragment = new MatchFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
         return fragment;
     }
 
@@ -104,7 +100,7 @@ public class MatchFragment extends Fragment implements SpecialContract.View{
 
     void setUpRecyclerView(){
         // Setup recycler view
-        adapter = new MatchAdapter(new ArrayList<>());
+        adapter = new MatchAdapter(new ArrayList<>(), getActivity());
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         matchRecyclerView.setLayoutManager(layoutManager);
         matchRecyclerView.setAdapter(adapter);

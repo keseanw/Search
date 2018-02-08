@@ -35,7 +35,6 @@ public class SpecialFragment extends Fragment implements SpecialContract.View {
     TextView notificationText;
 
     private SpecialAdapter adapter;
-
     private SpecialContract.Presenter mPresenter;
 
     @Inject
@@ -70,7 +69,7 @@ public class SpecialFragment extends Fragment implements SpecialContract.View {
 
     private void setUpRecyclerView() {
         // Setup recycler view
-        adapter = new SpecialAdapter(new ArrayList<>());
+        adapter = new SpecialAdapter(new ArrayList<>(), getActivity());
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         specialRecyclerView.setLayoutManager(layoutManager);
         specialRecyclerView.setAdapter(adapter);

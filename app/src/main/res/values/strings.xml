@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Search</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_special_fragment">Hello special fragment</string>
     <string name="hello_match_fragment">Hello match fragment</string>
+    <string name="bullet_seperator">"\u2022"</string>
+
 </resources>

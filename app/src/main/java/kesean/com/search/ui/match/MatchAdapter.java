@@ -1,5 +1,6 @@
 package kesean.com.search.ui.match;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +51,11 @@ class MatchAdapter extends BaseRecyclerViewAdapter<MatchAdapter.MatchViewHolder>
             ButterKnife.bind(this, view);
         }
     }
-    public MatchAdapter(@NonNull ArrayList<Datum> matchList) {
+    Context mContext;
+
+    public MatchAdapter(@NonNull ArrayList<Datum> matchList, Context context) {
         this.matchList = matchList;
+        this.mContext = context;
     }
 
     @Override
@@ -75,10 +81,21 @@ class MatchAdapter extends BaseRecyclerViewAdapter<MatchAdapter.MatchViewHolder>
 
         vh.username.setText(special_item.getUsername());
         vh.age.setText(String.valueOf(special_item.getAge()));
-        vh.locationCity.setText(special_item.getCityName());
+        String formattedCityName =  special_item.getCityName() + ",";
+        vh.locationCity.setText(formattedCityName);
         vh.locationState.setText(special_item.getStateCode());
-        vh.match.setText(String.valueOf(special_item.getMatch()));
+        vh.match.setText(matchConversion(special_item.getMatch()));
         Glide.with(vh.profileImage).load(special_item.getPhoto().getFullPaths().getOriginal()).into(vh.profileImage);
+    }
+
+    private String matchConversion(long matchOriginal){
+
+        int x = 2; // 2 decimal points
+        BigDecimal unscaled = new BigDecimal(matchOriginal);
+        BigDecimal scaled = unscaled.scaleByPowerOfTen(-x);
+        scaled = scaled.setScale(0, RoundingMode.HALF_EVEN);
+        String matchPercentage = String.valueOf(scaled) + "% Match";
+        return matchPercentage;
     }
 
     public void replaceData(List<Datum> special) {

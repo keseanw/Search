@@ -1,5 +1,6 @@
 package kesean.com.search.ui.specialblend;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,6 +36,8 @@ class SpecialAdapter extends BaseRecyclerViewAdapter<SpecialAdapter.SpecialViewH
         CardView cardView;
         @BindView(R.id.age)
         TextView age;
+        @BindView(R.id.seperator)
+        TextView seperator;
         @BindView(R.id.location_city)
         TextView locationCity;
         @BindView(R.id.location_state)
@@ -50,9 +54,11 @@ class SpecialAdapter extends BaseRecyclerViewAdapter<SpecialAdapter.SpecialViewH
     }
 
     private List<Datum> searchList;
+    private Context mContext;
 
-    public SpecialAdapter(@NonNull List<Datum> special) {
-        this.searchList = special;
+    public SpecialAdapter(@NonNull ArrayList<Datum> searchList, Context context) {
+        this.searchList =searchList;
+        this.mContext = context;
     }
 
     @Override
@@ -75,7 +81,8 @@ class SpecialAdapter extends BaseRecyclerViewAdapter<SpecialAdapter.SpecialViewH
         }
         vh.username.setText(special_item.getUsername());
         vh.age.setText(String.valueOf(special_item.getAge()));
-        vh.locationCity.setText(special_item.getCityName());
+        String formattedCityName =  special_item.getCityName() + ",";
+        vh.locationCity.setText(formattedCityName);
         vh.locationState.setText(special_item.getStateCode());
         vh.match.setText(String.valueOf(special_item.getMatch()));
         Glide.with(vh.profileImage).load(special_item.getPhoto().getFullPaths().getOriginal()).into(vh.profileImage);
