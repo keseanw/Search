@@ -1,7 +1,6 @@
 package kesean.com.search.ui.match;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -88,6 +87,10 @@ class MatchAdapter extends BaseRecyclerViewAdapter<MatchAdapter.MatchViewHolder>
         Glide.with(vh.profileImage).load(special_item.getPhoto().getFullPaths().getOriginal()).into(vh.profileImage);
     }
 
+
+    /*
+    * Rounding and converting the match value into a percentage string
+    * */
     private String matchConversion(long matchOriginal){
 
         int x = 2; // 2 decimal points
@@ -98,17 +101,28 @@ class MatchAdapter extends BaseRecyclerViewAdapter<MatchAdapter.MatchViewHolder>
         return matchPercentage;
     }
 
+    /*
+   * Replaces entire recycler view list with new data
+   * */
     public void replaceData(List<Datum> special) {
         this.matchList.clear();
         this.matchList.addAll(special);
         notifyDataSetChanged();
     }
 
+    /*
+    * Not in Use for Match Tab
+    * Updates a single element in the recycler view list when a user likes another users account
+    * */
     public void updateList(Datum user, int position) {
         this.matchList.set(position, user);
         notifyItemChanged(position);
     }
 
+    /*
+    * Not in Use
+    * Based on position, gets specific element from list
+    * */
     public Datum getItem(int position) {
         if (position < 0 || position >= matchList.size()) {
             throw new InvalidParameterException("Invalid item index");

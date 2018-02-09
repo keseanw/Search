@@ -21,13 +21,16 @@ public class AndroidApplication extends Application{
     public void onCreate() {
         super.onCreate();
 
+        //Dagger module init
         initializeDependencies();
 
         if (BuildConfig.DEBUG) {
+            //Timber logging & Stetho setup
             Timber.plant(new Timber.DebugTree());
             Stetho.initializeWithDefaults(this);
         }
 
+        //leak canary for memory leaks
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }

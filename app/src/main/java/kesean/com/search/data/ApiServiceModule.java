@@ -22,17 +22,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 class ApiServiceModule {
     private static final String BASE_URL = "base_url";
 
+    /*
+    * Dagger method binding
+    * */
+
     @Provides
     @Named(BASE_URL)
     String provideBaseUrl() {
         return Config.API_HOST;
     }
 
-//    @Provides
-//    @Singleton
-//    HeaderInterceptor provideHeaderInterceptor() {
-//        return new HeaderInterceptor();
-//    }
 
     @Provides
     @Singleton

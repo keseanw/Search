@@ -13,7 +13,7 @@ import kesean.com.search.data.model.Search;
 
 public interface SearchDataSource {
 
-    Flowable<List<Datum>> loadSearch(boolean forceRemote);
+    Flowable<List<Datum>> loadSearch();
 
     void addSearch(Datum data);
 

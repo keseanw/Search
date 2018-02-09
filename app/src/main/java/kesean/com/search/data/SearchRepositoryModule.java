@@ -17,12 +17,20 @@ import kesean.com.search.data.repository.remote.SearchRemoteDataSource;
 @Module
 public class SearchRepositoryModule {
 
+    /*
+    * Local data source for db querying
+    * */
+
     @Provides
     @Local
     @Singleton
     public SearchDataSource provideLocalDataSource(SearchLocalDataSource searchLocalDataSource) {
         return searchLocalDataSource;
     }
+
+    /*
+    * Remote data source for API calls
+    * */
 
     @Provides
     @Remote

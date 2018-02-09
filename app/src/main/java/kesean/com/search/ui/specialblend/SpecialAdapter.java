@@ -23,7 +23,6 @@ import butterknife.ButterKnife;
 import io.reactivex.annotations.NonNull;
 import kesean.com.search.R;
 import kesean.com.search.data.model.Datum;
-import kesean.com.search.data.model.Search;
 import kesean.com.search.ui.base.BaseRecyclerViewAdapter;
 
 /**
@@ -76,8 +75,9 @@ class SpecialAdapter extends BaseRecyclerViewAdapter<SpecialAdapter.SpecialViewH
         SpecialViewHolder vh = (SpecialViewHolder) viewHolder;
 
         Datum special_item = searchList.get(i);
+        //based on liked boolean value, user card view is highlighted yellow or not
         if(special_item.getLiked()){
-            vh.cardView.setCardBackgroundColor(Color.parseColor("#FFFD38"));
+            vh.cardView.setCardBackgroundColor(Color.parseColor("#FFFF97"));
         }else{
             vh.cardView.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
         }
@@ -90,6 +90,9 @@ class SpecialAdapter extends BaseRecyclerViewAdapter<SpecialAdapter.SpecialViewH
         Glide.with(vh.profileImage).load(special_item.getPhoto().getFullPaths().getOriginal()).into(vh.profileImage);
     }
 
+    /*
+    * Rounding and converting the match value into a percentage string
+    * */
     private String matchConversion(long matchOriginal){
 
         int x = 2; // 2 decimal points
@@ -106,17 +109,26 @@ class SpecialAdapter extends BaseRecyclerViewAdapter<SpecialAdapter.SpecialViewH
         return searchList.size();
     }
 
+    /*
+    * Replaces entire recycler view list with new data
+    * */
     public void replaceData(List<Datum> special) {
         this.searchList.clear();
         this.searchList.addAll(special);
         notifyDataSetChanged();
     }
 
+    /*
+    * Updates a single element in the recycler view list when a user likes another users account
+    * */
     public void updateList(Datum user, int position) {
         this.searchList.set(position, user);
         notifyItemChanged(position);
     }
 
+    /*
+    * Based on position, gets specific element from list
+    * */
     public Datum getItem(int position) {
         if (position < 0 || position >= searchList.size()) {
             throw new InvalidParameterException("Invalid item index");

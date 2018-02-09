@@ -33,6 +33,10 @@ public class MatchPresenter implements SpecialContract.MatchPresenter, Lifecycle
 
     private CompositeDisposable disposeBag;
 
+
+    /*
+  * Dependency Injecting Repository, View contract, IO & UI Schedulers
+  * */
     @Inject
     public MatchPresenter(SearchRepository repository, SpecialContract.View view,
                           @RunOn(SchedulerType.IO) Scheduler ioScheduler, @RunOn(SchedulerType.UI) Scheduler uiScheduler) {
@@ -49,18 +53,28 @@ public class MatchPresenter implements SpecialContract.MatchPresenter, Lifecycle
         disposeBag = new CompositeDisposable();
     }
 
+    /*
+  * Lifecycle annotations on lifecycle events
+  * Method call to Load data
+  * */
     @Override
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onAttach() {
         loadMatches();
     }
 
+    /*
+ * Clean up any no longer used resources here
+ * */
     @Override
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     public void onDetach() {
         disposeBag.clear();
     }
 
+    /*
+ * Method call to Load Match Data
+ * */
     @Override
     public void loadMatches() {
         // Clear old data on view

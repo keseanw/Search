@@ -3,7 +3,6 @@ package kesean.com.search.ui.specialblend;
 import java.util.List;
 
 import kesean.com.search.data.model.Datum;
-import kesean.com.search.data.model.Search;
 import kesean.com.search.ui.base.BasePresenter;
 
 /**
@@ -28,6 +27,9 @@ public interface SpecialContract {
         void showEmptySearchResult();
     }
 
+    /*
+    * Presenter for SpecialBlend tab
+    * */
     interface Presenter extends BasePresenter<SpecialContract.View> {
 
         void loadSpecial(boolean onlineRequired);
@@ -36,6 +38,9 @@ public interface SpecialContract {
 
     }
 
+    /*
+    * Presenter for matches tab
+    * */
     interface MatchPresenter extends BasePresenter<SpecialContract.View> {
 
         void loadMatches();

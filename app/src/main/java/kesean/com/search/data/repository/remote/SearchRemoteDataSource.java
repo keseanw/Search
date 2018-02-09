@@ -23,28 +23,42 @@ public class SearchRemoteDataSource implements SearchDataSource {
         this.searchService = searchService;
     }
 
+    /*
+    * API call for intial data
+    * */
     @Override
-    public Flowable<List<Datum>> loadSearch(boolean forceRemote) {
+    public Flowable<List<Datum>> loadSearch() {
         return searchService.loadSearch().map(SearchResponse::getSearch);
     }
 
+    /*
+    * Not in use for API calls
+    * */
     @Override
     public void addSearch(Datum data) {
         //Currently, we do not need this for remote source.
         throw new UnsupportedOperationException("Unsupported operation");
     }
 
-    //not in use
+    /*
+    * Not in use for API calls
+    * */
     @Override
     public int likeUser(Datum user){
         return 0;
     }
 
+    /*
+    * Not in use for API calls
+    * */
     @Override
     public void clearData() {
 
     }
 
+    /*
+    * Not in use for API calls
+    * */
     @Override
     public Flowable<List<Datum>> getMatches() {
         return null;

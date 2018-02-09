@@ -10,7 +10,9 @@ import kesean.com.search.ui.match.MatchFragment;
  * Created by Kesean on 2/5/18.
  */
 
-
+    /*
+    * Fragment page adapter for tabs
+    * */
 public class FragmentAdapter extends FragmentStatePagerAdapter {
 
         int TabCount;

@@ -10,6 +10,7 @@ import kesean.com.search.util.SchedulerModule;
  * Created by Kesean on 2/5/18.
  */
 
+
 @ActivityScope
 @Component(modules = {SpecialPresenterModule.class, SchedulerModule.class}, dependencies = {
         SearchRepositoryComponent.class

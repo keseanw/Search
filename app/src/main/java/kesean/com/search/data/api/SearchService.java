@@ -11,6 +11,9 @@ import retrofit2.http.Query;
 
 public interface SearchService {
 
+    /*
+    * API call
+    * */
     @GET("matchSample.json")
     Flowable<SearchResponse> loadSearch();
 

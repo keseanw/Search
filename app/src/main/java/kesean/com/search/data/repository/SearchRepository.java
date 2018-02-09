@@ -30,17 +30,13 @@ public class SearchRepository implements SearchDataSource{
         caches = new ArrayList<>();
     }
 
+    /*
+    * RX Flowable to emit data from data source for special blend tab
+    * */
     @Override
-    public Flowable<List<Datum>> loadSearch(boolean forceRemote) {
-//        if (forceRemote) {
-//            return refreshData();
-//        } else {
-//            if (caches.size() > 0) {
-//                // if cache is available, return it immediately
-//                return Flowable.just(caches);
-//            } else {
-                // else return data from local storage
-                return localDataSource.loadSearch(false)
+    public Flowable<List<Datum>> loadSearch() {
+
+                return localDataSource.loadSearch()
                         .take(1)
                         .flatMap(Flowable::fromIterable)
                         .doOnNext(search -> caches.add(search))
@@ -49,22 +45,29 @@ public class SearchRepository implements SearchDataSource{
                         .filter(list -> !list.isEmpty())
                         .switchIfEmpty(
                                 refreshData()); // If local data is empty, fetch from remote source instead.
-//            }
-//        }
     }
 
+    /*
+    * Not in use
+    * */
     @Override
     public void addSearch(Datum data) {
         throw new UnsupportedOperationException("Unsupported operation");
     }
 
+    /*
+    * Method to update user that has been liked
+    * */
     @Override
     public int likeUser(Datum user) {
         return localDataSource.likeUser(user);
     }
 
+    /*
+    * RX Flowable to emit data from data source to refresh data
+    * */
     private Flowable<List<Datum>> refreshData() {
-        return remoteDataSource.loadSearch(true)
+        return remoteDataSource.loadSearch()
                 .flatMap(Flowable::fromIterable)
                 .doOnNext(search -> {
                     caches.add(search);
@@ -73,12 +76,18 @@ public class SearchRepository implements SearchDataSource{
         }).toList().toFlowable();
     }
 
+    /*
+    * Clear data from data source
+    * */
     @Override
     public void clearData() {
         caches.clear();
         localDataSource.clearData();
     }
 
+    /*
+    * RX Flowable to emit data from data source for matches tab
+    * */
     @Override
     public Flowable<List<Datum>> getMatches() {
         return localDataSource.getMatches();

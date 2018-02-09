@@ -20,23 +20,39 @@ import kesean.com.search.data.model.Search;
 @Dao
 public interface SearchDao {
 
+    /*
+    * Query for getting all results in db for special blend tab
+    * */
     @Query("SELECT * FROM " + Config.SEARCH_TABLE_NAME)
     Flowable<List<Datum>> getAllSearch();
 
-    //not in use
+    /*
+    * Not in use
+    * */
     @Query("SELECT * FROM " + Config.SEARCH_TABLE_NAME + " WHERE mUserid == :id")
     Flowable<Datum> getSearchById(int id);
 
+    /*
+    * Insert query to db
+    * */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Datum search);
 
-    //not in use
+    /*
+    * Not in use
+    * */
     @Query("DELETE FROM " + Config.SEARCH_TABLE_NAME)
     void deleteAll();
 
+    /*
+    * Update user in db
+    * */
     @Update
     int update(Datum user);
 
+    /*
+    * Query for returning top 6 liked users with the highest match
+    * */
     @Query("SELECT * FROM " + Config.SEARCH_TABLE_NAME + " WHERE mLiked = 1 ORDER BY mMatch DESC LIMIT 6")
     Flowable<List<Datum>> getMatches();
 }

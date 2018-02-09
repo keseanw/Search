@@ -20,6 +20,10 @@ import kesean.com.search.data.model.Search;
 public class DatabaseModule {
     private static final String DATABASE = "database_name";
 
+    /*
+    * Database module
+    * */
+
     @Provides
     @Named(DATABASE)
     String provideDatabaseName() {

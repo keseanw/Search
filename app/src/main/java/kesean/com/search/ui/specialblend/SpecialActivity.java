@@ -4,16 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
-import butterknife.ButterKnife;
 import kesean.com.search.R;
-import kesean.com.search.data.model.Datum;
 import kesean.com.search.ui.base.BaseActivity;
 import kesean.com.search.ui.match.MatchFragment;
 

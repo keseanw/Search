@@ -24,32 +24,42 @@ public class SearchLocalDataSource implements SearchDataSource{
         this.searchDao = searchDao;
     }
 
+    /*
+    * RX Flowable call to DAO to get all data from db
+    * */
     @Override
-    public Flowable<List<Datum>> loadSearch(boolean forceRemote) {
+    public Flowable<List<Datum>> loadSearch() {
         return searchDao.getAllSearch();
     }
 
+    /*
+    * Method call to insert data in db
+    * */
     @Override
     public void addSearch(Datum data) {
         searchDao.insert(data);
     }
 
-//    @Override
-//    public Flowable<Datum> likeUser(String id, boolean likeVal) {
-//        return searchDao.update(id, likeVal);
-//    }
-
+    /*
+    * Method call to insert new user obj into db to update liked user boolean
+    * */
     @Override
     public int likeUser(Datum user) {
          return searchDao.update(user);
     }
 
 
+    /*
+    * Not in use
+    * */
     @Override
     public void clearData() {
 
     }
 
+    /*
+    * RX Flowable call to get all match results from db
+    * */
     @Override
     public Flowable<List<Datum>> getMatches() {
         return searchDao.getMatches();

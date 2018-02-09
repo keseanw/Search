@@ -13,6 +13,10 @@ import kesean.com.search.data.model.Search;
 
 public class SearchResponse {
 
+    /*
+    * API call response object returns here
+    * */
+
     @SerializedName("data")
     private List<Datum> search;
 

@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">Search</string>
 
-    <string name="hello_special_fragment">Hello special fragment</string>
-    <string name="hello_match_fragment">Hello match fragment</string>
     <string name="bullet_seperator">"\u2022"</string>
+    <string name="user_image">This is an user image</string>
+    <string name="username_placeholder">Michael Scott</string>
+    <string name="age_placeholder">45</string>
+    <string name="location_city_placeholder">Scranton</string>
+    <string name="location_state_placeholder">PA</string>
+    <string name="match_placeholder">100%</string>
+
+    <string name="msg_no_data">No matches found :( </string>
+    <string name="msg_empty_search_result">No result found.</string>
 
 </resources>
