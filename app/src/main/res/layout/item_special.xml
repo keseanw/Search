@@ -5,10 +5,12 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="300dp"
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_centerVertical="true"
     android:foreground="?android:attr/selectableItemBackground"
     android:padding="@dimen/padding_normal"
     app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +23,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/image_profile"
@@ -35,18 +37,16 @@
 
         <TextView
             android:id="@+id/username"
-            android:layout_width="239dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
             android:gravity="center"
             android:lines="1"
             android:text="Michael Scott"
-            android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/blackText"
-            android:textSize="22sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,69 +55,71 @@
         <TextView
             android:id="@+id/age"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_marginEnd="8dp"
+            android:layout_height="23dp"
+            android:layout_marginBottom="34dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="1dp"
             android:gravity="center"
             android:text="20"
-            android:textSize="22sp"
-            android:textAppearance="?android:textAppearanceSmall"
             android:textColor="@color/greyText"
-            app:layout_constraintBottom_toBottomOf="@+id/seperator"
-            app:layout_constraintEnd_toStartOf="@+id/location_city"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/seperator"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/seperator" />
+            app:layout_constraintTop_toBottomOf="@+id/username" />
 
         <TextView
             android:id="@+id/seperator"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="23dp"
+            android:layout_marginBottom="38dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginTop="1dp"
             android:gravity="center"
             android:lines="1"
             android:text="@string/bullet_seperator"
-            android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/greyText"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="@+id/location_city"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.421"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/location_city"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/age"
+            app:layout_constraintTop_toBottomOf="@+id/username" />
 
 
         <TextView
             android:id="@+id/location_city"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_marginEnd="8dp"
+            android:layout_height="23dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="4dp"
             android:gravity="center"
             android:text="City"
-            android:textSize="22sp"
-            android:textAppearance="?android:textAppearanceListItemSmall"
             android:textColor="@color/greyText"
-            app:layout_constraintBottom_toBottomOf="@+id/age"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/match"
             app:layout_constraintEnd_toStartOf="@+id/location_state"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/age"
-            app:layout_constraintTop_toTopOf="@+id/age" />
+            app:layout_constraintStart_toEndOf="@+id/seperator"
+            app:layout_constraintTop_toBottomOf="@+id/username" />
 
         <TextView
             android:id="@+id/location_state"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="23dp"
+            android:layout_marginBottom="33dp"
             android:gravity="center"
             android:text="State"
-            android:textSize="22sp"
-            android:textAppearance="?android:textAppearanceListItemSmall"
             android:textColor="@color/greyText"
-            app:layout_constraintBottom_toBottomOf="@+id/location_city"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/location_city"
-            app:layout_constraintTop_toTopOf="@+id/location_city" />
+            app:layout_constraintTop_toBottomOf="@+id/username" />
 
 
         <TextView
@@ -125,19 +127,19 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginBottom="36dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:textSize="22sp"
-            android:textColor="@color/blackText"
-            android:textStyle="bold"
             android:text="20%"
+            android:textColor="@color/blackText"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/location_city" />
+            app:layout_constraintTop_toBottomOf="@+id/location_city"
+            app:layout_constraintVertical_bias="0.142" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

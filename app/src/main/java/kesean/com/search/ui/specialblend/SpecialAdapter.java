@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,9 +86,20 @@ class SpecialAdapter extends BaseRecyclerViewAdapter<SpecialAdapter.SpecialViewH
         String formattedCityName =  special_item.getCityName() + ",";
         vh.locationCity.setText(formattedCityName);
         vh.locationState.setText(special_item.getStateCode());
-        vh.match.setText(String.valueOf(special_item.getMatch()));
+        vh.match.setText(matchConversion(special_item.getMatch()));
         Glide.with(vh.profileImage).load(special_item.getPhoto().getFullPaths().getOriginal()).into(vh.profileImage);
     }
+
+    private String matchConversion(long matchOriginal){
+
+        int x = 2; // 2 decimal points
+        BigDecimal unscaled = new BigDecimal(matchOriginal);
+        BigDecimal scaled = unscaled.scaleByPowerOfTen(-x);
+        scaled = scaled.setScale(0, RoundingMode.HALF_EVEN);
+        String matchPercentage = String.valueOf(scaled) + "% Match";
+        return matchPercentage;
+    }
+
 
     @Override
     public int getItemCount() {
