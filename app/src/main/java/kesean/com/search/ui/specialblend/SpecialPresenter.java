@@ -58,7 +58,7 @@ public class SpecialPresenter implements SpecialContract.Presenter, LifecycleObs
    * */
     @Override @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onAttach() {
-        loadSpecial(false);
+        loadSpecial();
     }
 
     /*
@@ -73,7 +73,7 @@ public class SpecialPresenter implements SpecialContract.Presenter, LifecycleObs
     * Method call to Load Special Blend Data
     * */
     @Override
-    public void loadSpecial(boolean onlineRequired) {
+    public void loadSpecial() {
         // Clear old data on view
         view.clearSpecial();
 

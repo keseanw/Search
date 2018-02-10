@@ -32,7 +32,7 @@ public interface SpecialContract {
     * */
     interface Presenter extends BasePresenter<SpecialContract.View> {
 
-        void loadSpecial(boolean onlineRequired);
+        void loadSpecial();
 
         void likeUser(Datum user, int position);
 

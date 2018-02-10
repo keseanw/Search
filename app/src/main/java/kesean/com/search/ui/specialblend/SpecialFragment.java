@@ -90,7 +90,7 @@ public class SpecialFragment extends Fragment implements SpecialContract.View {
                 (view, position) -> presenter.likeUser(adapter.getItem(position), position));
 
         // Refresh layout
-        refreshLayout.setOnRefreshListener(() -> presenter.loadSpecial(true));
+        refreshLayout.setOnRefreshListener(() -> presenter.loadSpecial());
         notificationText.setVisibility(View.GONE);
     }
 
