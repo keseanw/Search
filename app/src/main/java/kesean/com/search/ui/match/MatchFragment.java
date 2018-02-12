@@ -102,7 +102,8 @@ public class MatchFragment extends Fragment implements SpecialContract.View{
     void setUpRecyclerView(){
         // Setup recycler view
         adapter = new MatchAdapter(new ArrayList<>(), getActivity());
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
+        final int grid_columns = this.getResources().getInteger(R.integer.grid_columns);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),grid_columns);
         matchRecyclerView.setLayoutManager(layoutManager);
         matchRecyclerView.setAdapter(adapter);
         matchRecyclerView.setItemAnimator(new DefaultItemAnimator());

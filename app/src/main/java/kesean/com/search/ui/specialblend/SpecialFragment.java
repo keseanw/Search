@@ -81,7 +81,8 @@ public class SpecialFragment extends Fragment implements SpecialContract.View {
     private void setUpRecyclerView() {
         // Setup recycler view with grid layout
         adapter = new SpecialAdapter(new ArrayList<>(), getActivity());
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
+        final int grid_columns = this.getResources().getInteger(R.integer.grid_columns);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),grid_columns);
         specialRecyclerView.setLayoutManager(layoutManager);
         specialRecyclerView.setAdapter(adapter);
         specialRecyclerView.setItemAnimator(new DefaultItemAnimator());
