@@ -2,4 +2,6 @@
 <resources>
     <dimen name="padding_normal">8dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
+    <integer name="grid_columns">3</integer>
+
 </resources>
