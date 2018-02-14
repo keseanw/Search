@@ -72,7 +72,7 @@ class ApiServiceModule {
 
     @Provides
     @Singleton
-    SearchService provideQuestionService(Retrofit retrofit) {
+    SearchService provideSearchService(Retrofit retrofit) {
         return retrofit.create(SearchService.class);
     }
 }
